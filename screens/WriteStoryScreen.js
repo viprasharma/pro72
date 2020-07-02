@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,
+    KeyboardAvoidingView,ToastAndroid} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {Header} from 'react-native-elements';
 import db from '../config'
-import firebase from 'firebase'
- 
+//import firebase from 'firebase'
+
 export default class WriteStoryScreen extends React.Component {
     constructor(props){
         super(props);
@@ -27,16 +28,19 @@ export default class WriteStoryScreen extends React.Component {
             author: '',
             storyText: ''
         })
+        ToastAndroid.show('Your story has been sumitted'
+        , ToastAndroid.SHORT)
     }
 
     render(){
         return(
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}
+             behavior="padding" enabled>
                 <Header 
                     backgroundColor = {'pink'}
                     centerComponent = {{
-                        text : 'Story Hub',
-                        style : { color: 'cyan', fontSize: 20}
+                        text : 'story hub',
+                        style : { color: 'white', fontSize: 20}
                     }}
                 />
                 <TextInput 
@@ -71,10 +75,10 @@ export default class WriteStoryScreen extends React.Component {
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={this.submitStory}
-                   >
+                    >
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
